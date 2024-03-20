@@ -1,0 +1,13 @@
+# ides
+.vscode
+.idea
+
+# local
+.DS_Store
+.env
+.env.local
+
+# dependencies
+node_modules
+*-lock.yaml
+*.log
