@@ -1,4 +1,5 @@
-import { serve } from "@hono/node-server";
+// import { serve } from "@hono/node-server";
+import { handle } from "hono/vercel";
 import { Hono } from "hono";
 import { user } from "./apis";
 
@@ -14,6 +15,8 @@ app.get("/", (c) => {
 });
 
 // 启动服务，监听 3000 端口
-serve({ port: 3000, fetch: app.fetch }, () => {
-  console.log(`Server is running on http://localhost:3000`);
-});
+// serve({ port: 3000, fetch: app.fetch }, () => {
+//   console.log(`Server is running on http://localhost:3000`);
+// });
+
+export default handle(app);
