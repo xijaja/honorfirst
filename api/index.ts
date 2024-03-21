@@ -1,14 +1,28 @@
-import { Hono } from 'hono'
-import { handle } from 'hono/vercel'
+import { Hono } from "hono";
+import { logger } from "hono/logger";
+import { handle } from "hono/vercel";
+import user from "./user";
 
 export const config = {
-  runtime: 'edge'
-}
+  runtime: "edge",
+};
 
-const app = new Hono().basePath('/api')
+// 创建 Hono 应用
+const app = new Hono().basePath("/api");
 
-app.get('/', (c) => {
-  return c.json({ message: 'Hello Hono!' })
-})
+// 使用日志中间件
+app.use(logger());
 
-export default handle(app)
+// 注册用户路由
+app.route("/user", user);
+
+app.get("/", (c) => {
+  return c.json({ message: "Hello Hono, 你好啊!" });
+});
+
+app.get("/hello", (c) => {
+  return c.json({ message: "Hello the fucking world!" });
+});
+
+// 导出 Hono 应用
+export default handle(app);
